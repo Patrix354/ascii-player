@@ -1,25 +1,23 @@
 #include <python3.10/Python.h>
+#include <stdio.h>
+#include "myfunctions.h"
 
 static PyObject * ASCIIartError;
 
-/*static PyObject * spam_NazwaFunkcji(PyObject * self, PyObject * args)
-{
-    char* msg;
-    if (!PyArg_ParseTuple(args, "s", &msg)) // Parsowanie argumentów, np. string pod wskaźnik msg
-    {
-        return NULL;
-    }
+// static PyObject * ASCIIart_hello(PyObject * self, PyObject * args)
+// {
+//     printf("Hello");
 
-    return Py_BuildValue("i", 1);   //Zwracanie wartości int w formacie Pythonowskim
-}*/
-// Funkcja testowa
+//     return Py_BuildValue("i", 1);   //Zwracanie wartości int w formacie Pythonowskim
+// }
+// // Funkcja testowa
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////// Niżej nie warto zaglądać ////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
 static PyMethodDef ASCIIart_methods[] = {
-//    {"NazwaFunkcji", spam_witaj, METH_VARARGS, "Funkcaj Testowa"},
+    {"hello", ASCIIart_hello, METH_VARARGS, "Funkcaj Testowa"},
     {NULL,NULL, 0,NULL}
 };
 

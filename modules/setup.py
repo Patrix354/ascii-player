@@ -1,12 +1,12 @@
 from distutils.core import setup, Extension
 
-module1 = Extension('spam',
+module1 = Extension('ASCIIart',
                     define_macros = [('MAJOR_VERSION', '1'),
                                      ('MINOR_VERSION', '0')],
                     include_dirs = ['/usr/local/include'],
                     libraries = ['pthread'],
                     library_dirs = ['/usr/local/lib'],
-                    sources = ['modules/asciiartmodule.c'])
+                    sources = ['modules/asciiartmodule.c', 'modules/myfunctions.c']) #, 'modules/myfunctions.c'
 
 setup (name = 'ASCIIart',
        version = '1.0',

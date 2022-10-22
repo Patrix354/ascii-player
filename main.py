@@ -1,42 +1,19 @@
-import pygame 
-import time
-import moviepy.editor as mp
+import ASCIIaudio
+import ASCIIvideo
+import os
+import sys
 
-#########################
-### Audio segment
-
-def Soundtrack_extract(path):
-    clip = mp.VideoFileClip(path)
-    clip.audio.write_audiofile("soundtrack.mp3")
-
-def Soundmodule_init():
-    pygame.mixer.init()
-    pygame.mixer.music.load("soundtrack.mp3")
-
-def Do_some_music_shit():
-    pygame.mixer.music.play()
-    time.sleep(3)
-    pygame.mixer.music.pause()
-    time.sleep(3)
-    pygame.mixer.music.unpause()
-    time.sleep(3)
-
-#################
-### Video segment
-
-def Import_Vid(path):
-    global film
-    film = mp.VideoFileClip(path)
-
-def Extract_frame(num):
-    frame = film.get_frame(3)
-    return frame
+def Import_Module():        #This function is only for development stage
+    file_path = 'build/'
+    sys.path.append(os.path.dirname(file_path))
 
 if __name__ == '__main__':
-    Soundtrack_extract("Al.mp4")
-    Soundmodule_init()
-    #Do_some_music_shit()
+    Import_Module()
 
-    Import_Vid("Al.mp4")
-    f = Extract_frame(1)
-    print(f)
+    # ASCIIaudio.Soundtrack_extract("/home/piwo/Desktop/Studenckie_smieci/SEM3/PROS/ascii-player/Webdriver.mp4")
+    # ASCIIaudio.Soundmodule_init()
+    # ASCIIaudio.Do_some_music_shit()
+
+    ASCIIvideo.Import_Vid("/home/piwo/Desktop/Studenckie_smieci/SEM3/PROS/ascii-player/Webdriver.mp4")
+    f = ASCIIvideo.Extract_frame(10)
+    print(f[200][150])

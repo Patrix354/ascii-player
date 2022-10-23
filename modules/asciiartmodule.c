@@ -4,27 +4,21 @@
 
 static PyObject * ASCIIartError;
 
-// static PyObject * ASCIIart_hello(PyObject * self, PyObject * args)
-// {
-//     printf("Hello");
-
-//     return Py_BuildValue("i", 1);   //Zwracanie wartości int w formacie Pythonowskim
-// }
-// // Funkcja testowa
-
 ////////////////////////////////////////////////////////////////////////////////////////
-////////////////// Niżej nie warto zaglądać ////////////////////////////////////////////
+////////////////// Niżej nie warto zaglądać, nie ma tam nic ciekawego //////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
 static PyMethodDef ASCIIart_methods[] = {
-    {"hello", ASCIIart_hello, METH_VARARGS, "Funkcaj Testowa"},
+    {"load_frame", ASCIIart_load_frame, METH_VARARGS, "Załadowanie klatki"},
+    {"def_frame", ASCIIart_def_frame, METH_VARARGS, "Zdefiniowanie wielkości klatki"},
+    {"clean", ASCIIart_clean, METH_NOARGS, "Zwalnianie pamięci po zakończonym działaniu"},
     {NULL,NULL, 0,NULL}
 };
 
 static struct PyModuleDef ASCIIartmodule = {
     PyModuleDef_HEAD_INIT,
     "ASCIIart",   /* name of module */
-    NULL, /* module documentation, may be NULL */
+    NULL, /* module documentation */
     -1,       /* size of per-interpreter state of the module,
                  or -1 if the module keeps state in global variables. */
     ASCIIart_methods

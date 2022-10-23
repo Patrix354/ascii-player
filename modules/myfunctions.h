@@ -1,6 +1,8 @@
 #ifndef _MYFUNCTIONS_H_
 #define _MYFUNCTIONS_H_
 
-static PyObject * ASCIIart_hello(PyObject * self, PyObject * args);
+PyObject * ASCIIart_load_frame(PyObject * self, PyObject * args);
+PyObject * ASCIIart_def_frame(PyObject * self, PyObject * args);
+PyObject * ASCIIart_clean(PyObject * self, PyObject * args);
 
 #endif

@@ -4,7 +4,7 @@
 uint8_t ** frame;
 uint8_t ** scaled_frame;
 int lin_num = 0, col_num = 0, radius = 0;
-char* color_space = " .,:*-^=+%&$@0#";
+char* color_space = " .,`:*-^=+%&$@0#";
 
 double luma_cnt(PyObject * pix) //Obliczanie luminancji na podstawie listy z wartościami [R, G, B]
 {
@@ -132,11 +132,43 @@ PyObject * ASCIIart_scale_frame(PyObject * self, PyObject * args)   //Skalowanie
         }
     }
 
+    // for(int i = 0; i < scaled_lines; i++)   //Wypisywanie przeskalowanej klatki (w celach testowych)
+    // {
+    //     for(int j = 0; j < scaled_columns; j++)
+    //     {
+    //         printf("%d, ", scaled_frame[j][i]);
+    //     }
+    //     printf("\n");
+    // }
+    return Py_BuildValue("i", 1);
+}
+
+PyObject * ASCIIart_map_pixels(PyObject * self, PyObject * args)
+{
+    int scaled_lines = lin_num / radius;    //Wymiary skalowanej klatki
+    int scaled_columns = col_num / radius;
+    
     for(int i = 0; i < scaled_lines; i++)   //Wypisywanie przeskalowanej klatki (w celach testowych)
     {
         for(int j = 0; j < scaled_columns; j++)
         {
-            printf("%d, ", scaled_frame[j][i]);
+            scaled_frame[j][i] = map(scaled_frame[j][i], 0, 255, 0, strlen(color_space)-1);
+        }
+    }
+    return Py_BuildValue("i", 1);
+}
+
+PyObject * ASCIIart_print(PyObject * self, PyObject * args)
+{
+    int scaled_lines = lin_num / radius;    //Wymiary skalowanej klatki
+    int scaled_columns = col_num / radius;
+
+    system("clear");
+    for(int i = 0; i < scaled_lines; i++)   //Wypisywanie przeskalowanej klatki (w celach testowych)
+    {
+        for(int j = 0; j < scaled_columns; j++)
+        {
+            printf("%c", color_space[scaled_frame[j][i]]);
         }
         printf("\n");
     }

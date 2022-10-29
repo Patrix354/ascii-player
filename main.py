@@ -11,16 +11,13 @@ if __name__ == '__main__':
     Import_Module()
     import ASCIIart
 
-    #ASCIIaudio.Soundtrack_extract("media_files/Al.mp4")
-    #ASCIIaudio.Soundmodule_init()
-    #ASCIIaudio.Do_some_music_things()
-
-    ASCIIvideo.Import_Vid("media_files/Webdriver.mp4")
+    ASCIIvideo.Import_Vid("media_files/Webdriver.mp4")  # Importowanie video
     f = ASCIIvideo.Extract_frame(0)
     
-    ASCIIart.def_frame(len(f[0]), len(f))
-    ASCIIart.load_frame(f)
-    ASCIIart.def_scaled_frame(10)
-    ASCIIart.scale_frame();
+    ASCIIart.def_frame(len(f[0]), len(f))   #Zaalokowanie pamięci dla klatki o wymiarach takich jakie były w pliku 
+    ASCIIart.load_frame(f)  #Załadowanie klatki do modułu
 
-    ASCIIart.clean()
+    ASCIIart.def_scaled_frame(10)   #Zaalokowanie pamięci na przeskalowaną klatkę gdzie na 1 pixel przypada kwadrat o boku 10 pixeli
+    ASCIIart.scale_frame()     #Wykonanie operacji przeskalowania klatki
+
+    ASCIIart.clean()    #Zwolnienie pamięci

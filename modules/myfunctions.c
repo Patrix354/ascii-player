@@ -119,7 +119,7 @@ PyObject * ASCIIart_def_scaled_frame(PyObject * self, PyObject * args)    //Twor
     return Py_BuildValue("i", 1);
 }
 
-PyObject * ASCIIart_scale_frame(PyObject * self, PyObject * args)   //Skalowanie załadowanej klatki
+void ASCIIart_scale_frame()   //Skalowanie załadowanej klatki
 {
     int scaled_lines = lin_num / radius;    //Wymiary skalowanej klatki
     int scaled_columns = col_num / radius;
@@ -132,18 +132,10 @@ PyObject * ASCIIart_scale_frame(PyObject * self, PyObject * args)   //Skalowanie
         }
     }
 
-    // for(int i = 0; i < scaled_lines; i++)   //Wypisywanie przeskalowanej klatki (w celach testowych)
-    // {
-    //     for(int j = 0; j < scaled_columns; j++)
-    //     {
-    //         printf("%d, ", scaled_frame[j][i]);
-    //     }
-    //     printf("\n");
-    // }
     return Py_BuildValue("i", 1);
 }
 
-PyObject * ASCIIart_map_pixels(PyObject * self, PyObject * args)
+void ASCIIart_map_pixels()
 {
     int scaled_lines = lin_num / radius;    //Wymiary skalowanej klatki
     int scaled_columns = col_num / radius;
@@ -158,7 +150,7 @@ PyObject * ASCIIart_map_pixels(PyObject * self, PyObject * args)
     return Py_BuildValue("i", 1);
 }
 
-PyObject * ASCIIart_print(PyObject * self, PyObject * args)
+void ASCIIart_print()
 {
     int scaled_lines = lin_num / radius;    //Wymiary skalowanej klatki
     int scaled_columns = col_num / radius;
@@ -173,4 +165,11 @@ PyObject * ASCIIart_print(PyObject * self, PyObject * args)
         printf("\n");
     }
     return Py_BuildValue("i", 1);
+}
+
+PyObject * ASCIIart_print_frame(PyObject * self, PyObject * args)
+{
+    ASCIIart_scale_frame();
+    ASCIIart_map_pixels();
+    ASCIIart_print();
 }

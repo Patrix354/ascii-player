@@ -1,5 +1,4 @@
 #include <python3.10/Python.h>
-#include <stdio.h>
 #include "myfunctions.h"
 
 static PyObject * ASCIIartError;
@@ -12,6 +11,8 @@ static PyMethodDef ASCIIart_methods[] = {
     {"load_frame", ASCIIart_load_frame, METH_VARARGS, "Załadowanie klatki"},
     {"def_frame", ASCIIart_def_frame, METH_VARARGS, "Zdefiniowanie wielkości klatki"},
     {"clean", ASCIIart_clean, METH_NOARGS, "Zwalnianie pamięci po zakończonym działaniu"},
+    {"def_scaled_frame", ASCIIart_def_scaled_frame, METH_VARARGS, "Zdefiniowanie przeskalowanej klatki"},
+    {"scale_frame", ASCIIart_scale_frame, METH_NOARGS, "Uśrednienie wartości pixeli"},
     {NULL,NULL, 0,NULL}
 };
 

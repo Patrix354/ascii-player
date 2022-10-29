@@ -20,12 +20,7 @@ if __name__ == '__main__':
     
     ASCIIart.def_frame(len(f[0]), len(f))
     ASCIIart.load_frame(f)
-    
-    start = time.time()
-    # ... 
-    for i in range(30):
-        f = ASCIIvideo.Extract_frame(i)
-        ASCIIart.load_frame(f)
-    stop = time.time()
-    print("\n ", 30/(stop-start))
+    ASCIIart.def_scaled_frame(10)
+    ASCIIart.scale_frame();
+
     ASCIIart.clean()

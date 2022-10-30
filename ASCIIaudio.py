@@ -12,7 +12,6 @@ def soundtrack_extract(path):   # Pobranie ścieżki dźwiękowej z pliku
 
 def soundmodule_init(file): # Załadowanie pobranej ścieżki dźwiękowej
     soundtrack_extract(file)
-    
     pygame.mixer.pre_init()
     pygame.mixer.init()
     pygame.mixer.music.load("media_files/soundtrack.mp3")

@@ -6,7 +6,7 @@ module1 = Extension('ASCIIart',
                     include_dirs = ['/usr/local/include'],
                     libraries = ['pthread'],
                     library_dirs = ['/usr/local/lib'],
-                    sources = ['modules/asciiartmodule.c', 'modules/myfunctions.c'])
+                    sources = ['modules/asciiartmodule.c', 'modules/modulefunctions.c'])
 
 setup (name = 'ASCIIart',
        version = '1.0',

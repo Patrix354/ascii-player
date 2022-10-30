@@ -8,35 +8,44 @@ import time
 ##### Video segment #####
 #########################
 
-def Import_Module():        # Ta funkcja jest potrzebna tylko podczas użytkowania ziezainstalowanego modułu
+metadata = {}
+
+def add_module_path():        # Ta funkcja jest potrzebna tylko podczas użytkowania ziezainstalowanego modułu
     sys.path.append("build/lib.linux-x86_64-cpython-310/") 
 
-def Import_Vid(path):   # Zaimportowanie pliku wideo z wykorzystaniem biblioteki OpenCV2
+def import_Vid(path):   # Zaimportowanie pliku wideo z wykorzystaniem biblioteki OpenCV2
     global film
     film = cv2.VideoCapture(path)
 
-def Extract_frame(num): # Pobranie klatki z wykorzystaniem biblioteki OpenCV2
-    global film
-    film.set(1, num)
-    ret, frame = film.read()
+def extract_frame(num): # Pobranie klatki z wykorzystaniem biblioteki OpenCV2
+    global film, metadata
+    film.set(1, num)        # Ustaw klatkę w żądanym miejscu
+    frame = film.read()[1]  # Odczytaj klatkę                       
+    frame = cv2.resize(frame, (metadata["width"], metadata["height"]))  #Przeskaluj pobraną klatkę na podane wartości
     return frame.tolist()
 
-def Vid_module_init(file):
-    Import_Module()
-    import ASCIIart
+def module_init(file, w = 90, h = 60):
+    global film, metadata
+    import_Vid(file)                                # Importowanie video
+    metadata["width"], metadata["height"] = w, h
+    read_metadata()
 
-    Import_Vid(file)  # Importowanie video
-    f = Extract_frame(0) #Pobranie pierwszej klatki aby sprawdzić wymiary potrzene zo zalokowania pamieci
-    return len(f[0]), len(f) #(szerokość, wysokość)
+def read_metadata():
+    global film, metadata
+    metadata["frames_cnt"] = film.get(7)
+    metadata["framerate"] = film.get(5)
 
 def play(beg):
-    Import_Module()
+    global metadata
+    add_module_path()
     import ASCIIart
 
     start = time.time()
-    for i in range(1000):
-        frame_num = int((time.time() - start) * 30) + beg     #Program niestety nie dziła płynnie z prędością 30 fps. 
-        f = Extract_frame(frame_num)           #Dlatego pobierane są obrazy z taką gęstością żeby nie następowała latencja między audio i video
+    while True:                                                                     #To wyrażenie jest po to, aby przy opóźnieniach lub spowolnieniach 
+        frame_num = int((time.time() - start) * metadata["framerate"]) + beg        #w przetwarzaniu zachować synchronizację z muzyką
+        if frame_num >= metadata["frames_cnt"]:                                     #Warunek sorawdzający czy nie skończył się plik
+            break
+        f = extract_frame(frame_num)   
 
         ASCIIart.load_frame(f)  #Załadowanie klatki do modułu
         ASCIIart.print()    #Wypisanie klatki

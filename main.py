@@ -4,25 +4,29 @@ import os
 import sys
 import time
 
-def Import_Module():        # Ta funkcja jest potrzebna tylko podczas użytkowania ziezainstalowanego modułu
+def add_module_path():        # Ta funkcja jest potrzebna tylko podczas użytkowania niezainstalowanego modułu
     sys.path.append("build/lib.linux-x86_64-cpython-310/") 
 
-def setup(path, radius):
-    Import_Module()
+def setup(path, w, h):
+    add_module_path()
     import ASCIIart
 
-    ASCIIaudio.Soundmodule_init(path)
-    width, height = ASCIIvideo.Vid_module_init(path)
-    ASCIIart.init(width, height, radius)
+    ASCIIaudio.soundmodule_init(path)
+    ASCIIvideo.module_init(path, w, h)
+    ASCIIart.init(w, h)
 
 def main():
-    file = "media_files/RickRoll.mp4"
-    scale = 7
+    add_module_path()
+    import ASCIIart
 
-    setup(file, scale)
+    file = "media_files/AURORA-Cure_for_me360p.mp4"
+    width = 90
+    height = 60
 
-    ASCIIaudio.play()
-    ASCIIvideo.play(0)
+    setup(file, width, height)  # inicjalizacja
+
+    ASCIIaudio.play()   #Załącz muzykę
+    ASCIIvideo.play(0)  #Załącz video od klatki 0
         
     ASCIIart.clean()    #Zwolnienie pamięci
 

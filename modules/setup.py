@@ -1,14 +1,14 @@
 from distutils.core import setup, Extension
 
-module1 = Extension('ASCIIart',
+module1 = Extension('ASCIImodule',
                     define_macros = [('MAJOR_VERSION', '1'),
                                      ('MINOR_VERSION', '0')],
                     include_dirs = ['/usr/local/include'],
                     libraries = ['pthread'],
                     library_dirs = ['/usr/local/lib'],
-                    sources = ['modules/asciiartmodule.c', 'modules/modulefunctions.c'])
+                    sources = ['modules/interface.c', 'modules/module.c'])
 
-setup (name = 'ASCIIart',
+setup (name = 'ASCIImodule',
        version = '1.0',
        description = 'This is a package for generating ASCII art',
        author = 'Patryk Korycki',

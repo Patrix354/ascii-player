@@ -59,7 +59,7 @@ char* process_frame(int* frame, int frame_width, int frame_height, char* charact
 {
 	static char* frame_with_mapped_values = NULL;
     static char* frame_with_ASCIIart = NULL;
-    int length_of_character_space = strlen(character_space) ;
+    int length_of_character_space = strlen(character_space);
 
 	frame_with_mapped_values = map_frame(frame, frame_width, frame_height, length_of_character_space);
     frame_with_ASCIIart = add_new_line_characters(frame_with_mapped_values, frame_width, frame_height, character_space);
@@ -70,6 +70,6 @@ char* process_frame(int* frame, int frame_width, int frame_height, char* charact
 void display_frame(char* frame)
 {
 	system("clear");
-	printf("%s", frame);
+	printf("\r%s", frame);
 	return;
 }

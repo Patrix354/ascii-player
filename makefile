@@ -1,4 +1,4 @@
-SRC_MEDIA = media_files/RickRoll.mp4
+SRC_MEDIA = media_files/AURORA-Cure_for_me360p.mp4
 WIDTH = 100
 HEIGHT = 50
 

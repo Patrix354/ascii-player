@@ -10,7 +10,7 @@ import ASCIImodule
 ##### Video segment #####
 #########################
 
-def Import_Vid(path):   # Zaimportowanie pliku wideo z wykorzystaniem biblioteki OpenCV2
+def Import_Vid(path):
     return cv2.VideoCapture(path)
 
 def Get_framerate_of_clip(clip):
@@ -20,7 +20,7 @@ def Get_number_of_frames_in_clip(clip):
     return clip.get(7)
 
 def Set_current_frame(clip, frame_number):
-    clip.set(1, frame_number)        # Ustaw żądaną klatkę
+    clip.set(1, frame_number)
 
 def Read_frame_from_clip(clip):
     return clip.read()[1]
@@ -39,7 +39,7 @@ def extract_frame(clip, frame_number, width, height):
     return frame.tolist()
 
 def setup(file):
-    return Import_Vid(file)                                # Importowanie video
+    return Import_Vid(file)
 
 def play(clip, begin_frame, width, height):
     framerate = Get_framerate_of_clip(clip)

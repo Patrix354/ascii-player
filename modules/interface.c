@@ -3,7 +3,6 @@
 
 static PyObject * ASCIImoduleError;
 
-
 static int get_height_of_frame(void* frame)
 {
 	int length = ((PyListObject*)frame)->allocated;

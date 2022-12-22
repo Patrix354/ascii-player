@@ -23,15 +23,19 @@ def Set_current_frame(clip, frame_number):
     clip.set(1, frame_number)        # Ustaw żądaną klatkę
 
 def Read_frame_from_clip(clip):
-    return clip.read()[1]  # Odczytaj klatkę 
+    return clip.read()[1]
 
 def Resize_frame(frame, width, height):
     return cv2.resize(frame, (width, height), interpolation=cv2.INTER_AREA)
 
-def extract_frame(clip, frame_number, width, height): # Pobranie klatki z wykorzystaniem biblioteki OpenCV2
-    Set_current_frame(clip, frame_number)        # Ustaw żądaną klatkę
-    frame = Read_frame_from_clip(clip) # Odczytaj klatkę                       
-    frame = Resize_frame(frame, width, height)  #Przeskaluj pobraną klatkę na podane wartości
+def Monochromatize_frame(frame):
+    return cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+def extract_frame(clip, frame_number, width, height):
+    Set_current_frame(clip, frame_number)
+    frame = Read_frame_from_clip(clip)                    
+    frame = Resize_frame(frame, width, height)
+    frame = Monochromatize_frame(frame)
     return frame.tolist()
 
 def setup(file):
@@ -46,5 +50,4 @@ def play(clip, begin_frame, width, height):
         if frame_num >= number_of_frames:                                     #Warunek sprawdzający czy nie skończył się plik
             break
         f = extract_frame(clip, frame_num, width, height)   
-
         ASCIImodule.Process_and_print(f)  #Załadowanie klatki do modułu

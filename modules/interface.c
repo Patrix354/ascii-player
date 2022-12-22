@@ -19,7 +19,7 @@ static int get_width_of_frame(void* frame)
 
 static int* alocate_memory_for_converted_frame(int frame_width, int frame_height)
 {
-	int* c_frame = malloc(frame_width * frame_height * NUMBER_OF_RGB_COORDNATES * sizeof(int));
+	int* c_frame = malloc(frame_width * frame_height * sizeof(int));
 	return c_frame;
 }
 
@@ -32,7 +32,6 @@ int* convert_python_frame_into_C_table(void* frame)
 	static int* converted_frame = NULL;
 	static void* selected_line = NULL;
 	static void* selected_pixel = NULL;
-	static void* color_of_selected_pixel = NULL;
 
 	if (converted_frame == NULL)	converted_frame = alocate_memory_for_converted_frame(frame_width, frame_height);
 	
@@ -42,12 +41,8 @@ int* convert_python_frame_into_C_table(void* frame)
 		for (int j = 0; j < frame_width; j++)
 		{
 			selected_pixel = ((PyListObject*) selected_line)->ob_item[j];
-			for (int k = 0; k < NUMBER_OF_RGB_COORDNATES; k++)
-			{
-				index_offset = NUMBER_OF_RGB_COORDNATES * i * frame_width + NUMBER_OF_RGB_COORDNATES * j + k;
-				color_of_selected_pixel = ((PyListObject*) selected_pixel)->ob_item[k];
-				converted_frame[index_offset] = *( ((PyLongObject*) color_of_selected_pixel)->ob_digit);
-			}
+			index_offset = i * frame_width + j;
+			converted_frame[index_offset] = *( ((PyLongObject*) selected_pixel)->ob_digit);
 		}
 	}
 		
@@ -61,12 +56,12 @@ PyObject* ASCIImodule_Process_and_print(PyObject* dummy_arg, PyObject* valid_arg
 	int frame_width = get_width_of_frame(input_frame);
 	int frame_height = get_height_of_frame(input_frame);
 	//////
-	const char* character_space = " .,`:*-^=+%&$@0#";
+	char* character_space = " .,`:*-^=+%&$@0#";
 	//////
 	static int* frame_in_C_format = NULL;
 	static char* frame_ready_to_display = NULL;
 	//////////////////////////////////////
-
+	// printf("ty!\n");
 	frame_in_C_format = convert_python_frame_into_C_table(input_frame);
 	frame_ready_to_display = process_frame(frame_in_C_format, frame_width, frame_height, character_space);
     display_frame(frame_ready_to_display);

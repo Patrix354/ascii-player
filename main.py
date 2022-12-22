@@ -3,18 +3,24 @@ import ASCII_python_interface
 import os
 import sys
 import time
+import argparse
 
+def Parse_input_arguments():
+    parser = argparse.ArgumentParser(description="ASCIIplayer - This is a simple multimedia player, but it works fully in terminal ")
+    parser.add_argument('-W', '--width', type=int, metavar='', help='Width of displayed frame')
+    parser.add_argument('-H', '--height', type=int, metavar='', help='Height of displayed frame')
+    parser.add_argument('-P', '--path', type=str, metavar='', help='Path to media source file')
+    arguments = parser.parse_args()
+    return vars(arguments)
 
 def main():
-    file = "media_files/AURORA-Cure_for_me360p.mp4"
-    width = 90
-    height = 60
+    arguments = Parse_input_arguments()
 
-    ASCIIaudio.soundmodule_init(file)
-    clip_file = ASCII_python_interface.setup(file)  # inicjalizacja
+    ASCIIaudio.soundmodule_init(arguments["path"])
+    clip_file = ASCII_python_interface.setup(arguments["path"])
 
-    ASCIIaudio.play()   #Załącz muzykę
-    ASCII_python_interface.play(clip_file, 0, width, height)  #Załącz video od klatki 0
+    ASCIIaudio.play() 
+    ASCII_python_interface.play(clip_file, 0, arguments["width"], arguments["height"])
         
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 import ASCIIaudio
 import ASCII_python_interface
+import keyboard_detection
 import os
 import sys
 import time
@@ -15,13 +16,21 @@ def Parse_input_arguments():
 
 def main():
     arguments = Parse_input_arguments()
-
+    keyboard_detection.set_console_attributes()
     ASCIIaudio.soundmodule_init(arguments["path"])
     clip_file = ASCII_python_interface.setup(arguments["path"])
+    current_frame = 0
 
-    ASCIIaudio.play() 
-    ASCII_python_interface.play(clip_file, 0, arguments["width"], arguments["height"])
+    while current_frame >= 0:
+        ASCIIaudio.play() 
+        current_frame = ASCII_python_interface.play(clip_file, current_frame, arguments["width"], arguments["height"])
         
+        if current_frame > 0:
+            ASCIIaudio.pause()
+            while True:
+                if keyboard_detection.is_pressed(32):
+                    break
+                
 
 if __name__ == '__main__':
     main()

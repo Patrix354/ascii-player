@@ -25,13 +25,10 @@ def read_keyboard_events():
     dr,dw,de = select([sys.stdin], [], [], 0)
     return dr != []
 
-def is_pressed(key):
+def what_is_pressed():
     if read_keyboard_events():
-        c = getch()
-        if ord(c) == key:
-            return True
-        else:
-            return False
+        character = getch()
+        return ord(character)
 
 def restore_console_atributes(file_descriptor, old_atributtes):
     termios.tcsetattr(file_descriptor, termios.TCSAFLUSH, old_atributtes)

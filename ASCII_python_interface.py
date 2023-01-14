@@ -5,6 +5,7 @@ import sys
 import time
 import keyboard_detection
 import ASCIImodule
+import ASCIIaudio
 
 #########################
 ##### Video segment #####
@@ -61,23 +62,59 @@ def extract_frame(clip, frame_number, width, height):
     return frame.tolist()
 
 def setup(file):
+    ASCIIaudio.soundmodule_init(file)
     return Import_Vid(file)
 
 def play(clip, begin_frame, width, height):
     '''
-    This function executes sequence of procedures to play a video
+    This function executes sequence of procedures to play a video, gets nessesary properties for smooth display and 
+    calls function responsible for managing place of timestamp (here it names current_frame_number)
     '''
+    ASCIIaudio.play() 
     framerate = Get_framerate_of_clip(clip)
     number_of_frames = Get_number_of_frames_in_clip(clip)
     start = time.time()
+    frame_offset = 0
 
     while True:
-        if keyboard_detection.is_pressed(32) == True: #SPACE
-            return current_frame_number
-
-        current_frame_number = int((time.time() - start) * framerate) + begin_frame
+        overpassed_time = time.time() - start
+        current_frame_number = int(overpassed_time * framerate) + begin_frame + frame_offset
         if current_frame_number >= number_of_frames:
             return -1
 
         image = extract_frame(clip, current_frame_number, width, height)   
         ASCIImodule.Process_and_print(image)
+
+
+        pressed_key = keyboard_detection.what_is_pressed()
+        if pressed_key == 32: #SPACE
+            ASCIIaudio.pause()
+            return current_frame_number
+        if pressed_key == 113:
+            sys.exit(0)
+
+        frame_offset = manage_scrolling(framerate, overpassed_time, frame_offset, current_frame_number, number_of_frames, pressed_key)
+        
+
+def manage_scrolling(framerate, overpassed_time, frame_offset, current_frame_number, number_of_frames, pressed_key):
+    '''
+    This function takes bunch of properties of a video like framerate, overpasst time from start playing,
+    how much video is already scrolled (here it names frame_offset), current playing frame, total count of frames in file
+    and key that was pressed (if it is not value of pressed key is None).
+    It returns new frame_offset (overall moves timestamp 5s forward or backward)
+    '''
+    if pressed_key == 97: #LEFT ARROW - a key
+        if current_frame_number < 5*framerate:
+            ASCIIaudio.restart_music()
+            frame_offset = -current_frame_number
+        else:
+            frame_offset -= 5*framerate
+            ASCIIaudio.scroll_music(overpassed_time + (frame_offset/framerate))
+
+    if pressed_key == 100: #RIGHT ARROW - d key
+        if current_frame_number > (number_of_frames - 5*framerate):
+            sys.exit(0)
+        else:
+            frame_offset += 5*framerate
+            ASCIIaudio.scroll_music(overpassed_time + (frame_offset/framerate))
+    return frame_offset

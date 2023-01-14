@@ -17,18 +17,16 @@ def Parse_input_arguments():
 def main():
     arguments = Parse_input_arguments()
     keyboard_detection.set_console_attributes()
-    ASCIIaudio.soundmodule_init(arguments["path"])
+
     clip_file = ASCII_python_interface.setup(arguments["path"])
     current_frame = 0
 
     while current_frame >= 0:
-        ASCIIaudio.play() 
         current_frame = ASCII_python_interface.play(clip_file, current_frame, arguments["width"], arguments["height"])
         
         if current_frame > 0:
-            ASCIIaudio.pause()
             while True:
-                if keyboard_detection.is_pressed(32):
+                if keyboard_detection.what_is_pressed() == 32:
                     break
                 
 

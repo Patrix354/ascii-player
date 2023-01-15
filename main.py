@@ -1,4 +1,3 @@
-import ASCIIaudio
 import ASCII_python_interface
 import keyboard_detection
 import os
@@ -26,8 +25,11 @@ def main():
         
         if current_frame > 0:
             while True:
-                if keyboard_detection.what_is_pressed() == 32:
+                pressed_key = keyboard_detection.what_is_pressed()
+                if pressed_key == 32:
                     break
+                if pressed_key == 113:
+                    sys.exit(0)
                 
 
 if __name__ == '__main__':

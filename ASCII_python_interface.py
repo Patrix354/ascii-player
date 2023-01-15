@@ -90,15 +90,15 @@ def play(clip, begin_frame, width, height):
         if pressed_key == 32: #SPACE
             ASCIIaudio.pause()
             return current_frame_number
-        if pressed_key == 113:
+        if pressed_key == 113: # Quit - q key
             sys.exit(0)
 
-        frame_offset = manage_scrolling(framerate, overpassed_time, frame_offset, current_frame_number, number_of_frames, pressed_key)
+        frame_offset = manage_scrolling(framerate, frame_offset, current_frame_number, number_of_frames, pressed_key)
         
 
-def manage_scrolling(framerate, overpassed_time, frame_offset, current_frame_number, number_of_frames, pressed_key):
+def manage_scrolling(framerate, frame_offset, current_frame_number, number_of_frames, pressed_key):
     '''
-    This function takes bunch of properties of a video like framerate, overpasst time from start playing,
+    This function takes bunch of properties of a video like framerate,
     how much video is already scrolled (here it names frame_offset), current playing frame, total count of frames in file
     and key that was pressed (if it is not value of pressed key is None).
     It returns new frame_offset (overall moves timestamp 5s forward or backward)
@@ -109,12 +109,12 @@ def manage_scrolling(framerate, overpassed_time, frame_offset, current_frame_num
             frame_offset = -current_frame_number
         else:
             frame_offset -= 5*framerate
-            ASCIIaudio.scroll_music(overpassed_time + (frame_offset/framerate))
+            ASCIIaudio.scroll_music((current_frame_number/framerate) - 5)
 
     if pressed_key == 100: #RIGHT ARROW - d key
         if current_frame_number > (number_of_frames - 5*framerate):
             sys.exit(0)
         else:
             frame_offset += 5*framerate
-            ASCIIaudio.scroll_music(overpassed_time + (frame_offset/framerate))
+            ASCIIaudio.scroll_music((current_frame_number/framerate) + 5)
     return frame_offset

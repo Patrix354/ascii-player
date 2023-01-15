@@ -81,10 +81,10 @@ static PyMethodDef ASCIImodule_methods[] = {
 
 static PyModuleDef ASCIImodule_module = {
 	PyModuleDef_HEAD_INIT,
-	"ASCIImodule",                        // Module name to use with Python import statements
-	"Module for displaying videos in console",  // Module description
+	"ASCIImodule",
+	"Module for displaying videos in console",
 	0,
-	ASCIImodule_methods                   // Structure that defines the methods of the module
+	ASCIImodule_methods
 };
 
 

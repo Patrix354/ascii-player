@@ -1,4 +1,6 @@
-# ASCII Player
+<div align="center" style="text-align:center">
+ <h2>ASCII Player</h2>
+ </div>
 
 
 ## Co to jest?
@@ -10,8 +12,38 @@ Działanie programu jest podzielone na dwie części (tej npisanej w pythonie i 
 
 ## Moduły
 
-Moduły są pisane w języku C z wykorzystaniem biblioteki ``` Python.h ```. Pozwala ona na integrację języka C i Pythona (m.in. pozwalając na przesłanie argumentów z poziomu słabotypowanego Pythona na silnietypowany C).
+Moduły są pisane w języku C z wykorzystaniem biblioteki ``` Python.h ``` dostarczanej razem z interpreterem. Pozwala ona na integrację języka C i Pythona (m.in. pozwalając na przesłanie argumentów z poziomu słabotypowanego Pythona na silnietypowany C).
 
 ## Użycie
 
-Zmiana parametrów obrazu (skalowanie, czy zestaw znaków) będzie można zdefiniować w terminalu w postaci argumentów do programu. Po uruchomieniu programu będnie możliwość sterowania odtwarzaniem (np. pauza). 
+Moduł potrzebny do działania tego programu na ten momnet został skompilowany pod wersję pythona 3.10 i tylko pod tą działa. Jeżeli chcesz ją uruchomić na innej wersji należy moduł zrekompilować poleceniem 
+```bash
+    make
+```
+ Przed uruchomieniem należy zainstalować odpowiednie paczki pythona poleceniem:
+```bash
+    pip3 install opencv-python pygame moviepy numpy
+```
+Jeśli to nie działa trzeba stworzyć środowisko witrtualne pythona i tam zainstalować paczki.
+
+Uruchomienie ogranicza się do polecenia
+-
+```bash
+    python3.11 player.py -P [plik.mp4] -W [Szerokość] -H [Wysokość]
+```
+lub
+```bash
+    python3 player.py -P [plik.mp4] -W [Szerokość] -H [Wysokość]
+```
+
+Gdzie [Szerokość] i [Wysokość] są wielkościami w pikselach
+
+
+<div align="center" style="text-align:center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/Toto-Africa.png">
+    <source media="(prefers-color-scheme: light)" srcset="images/Toto-Africa.png">
+    <img alt="ncspot logo" height="512" src="images/logo_text_light.svg">
+  </picture>
+  <h3>Przykładowy obraz przetworzony przez program</h3>
+  </div>

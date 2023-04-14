@@ -43,7 +43,7 @@ Gdzie [Szerokość] i [Wysokość] są wielkościami w pikselach
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/Toto-Africa.png">
     <source media="(prefers-color-scheme: light)" srcset="images/Toto-Africa.png">
-    <img alt="ncspot logo" height="512" src="images/logo_text_light.svg">
+    <img alt="Klatka z teledysku Toto - Africa" src="images/logo_text_light.svg">
   </picture>
   <h3>Przykładowy obraz przetworzony przez program</h3>
   </div>

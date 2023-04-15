@@ -17,12 +17,7 @@ Moduł potrzebny do działania tego programu na ten momnet został skompilowany 
 ```
 Jeśli to nie działa trzeba stworzyć środowisko witrtualne pythona i tam zainstalować paczki.
 
-Uruchomienie ogranicza się do polecenia
--
-```bash
-    python3.11 player.py -P [plik.mp4] -W [Szerokość] -H [Wysokość]
-```
-lub
+Uruchomienie ogranicza się do polecenia:
 ```bash
     python3 player.py -P [plik.mp4] -W [Szerokość] -H [Wysokość]
 ```

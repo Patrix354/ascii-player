@@ -7,7 +7,7 @@ Jest to odtwarzacz, który służy do odtwarzania plików wideo w emulatorze ter
 
 ## Użycie
 
-Moduł potrzebny do działania tego programu na ten momnet został skompilowany pod wersję pythona 3.10 i tylko pod tą działa. Jeżeli chcesz ją uruchomić na innej wersji należy moduł zrekompilować poleceniem 
+Moduł potrzebny do działania tego programu na ten momnet został skompilowany dla wersji pythona >3.10. Jeżeli chcesz ją uruchomić na innej wersji należy moduł zrekompilować poleceniem 
 ```bash
     make
 ```

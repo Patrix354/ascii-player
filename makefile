@@ -10,5 +10,4 @@ copy_module:
 clear:
 	rm -rf __pycache__
 	rm -rf build/*
-	rm ASCIImodule.cpython*
 .SILENT:
